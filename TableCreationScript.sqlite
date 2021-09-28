@@ -1,0 +1,21 @@
+CREATE TABLE infodata (
+region text ,
+exchange TEXT,
+index_ TEXT primary key,
+currency text
+);
+CREATE TABLE indexdata (
+Index_ text primary key,
+Date_ date,
+Open_ decimal(10,2),
+High decimal(10,2),
+Low decimal(10,2),
+Close_ decimal(10,2),
+Volume Bigint
+);
+CREATE TABLE exchange_rates (
+Date_ date,
+USD int,
+exchange_rate decimal(10,4),
+currency text
+)
