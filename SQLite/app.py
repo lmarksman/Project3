@@ -19,6 +19,8 @@ Base = automap_base()
 # reflect the tables
 Base.prepare(engine, reflect=True)
 
+print(Base.classes.keys())
+
 stock = Base.classes.stock_exchange
 
 #################################################
