@@ -37,11 +37,11 @@ def home():
 
 
 @app.route("/api/exchange")
-def pals():
+def exchange():
 
     session = Session(engine)
 
-    results = session.query(stock.Index, stock.Date,stock.Open,stock.High,stock.Low,stock.Close,stock.Voume,stock.Region,stock.Exchange,stock.Currency,stock.USD,stock.exchange_rate,stock.Open_USD,stock.High_USD,stock.Low_USD,stock.Close_USD).all()
+    results = session.query(stock.Stock_index, stock.Date,stock.Open,stock.High,stock.Low,stock.Close,stock.Volume,stock.Region,stock.Exchange,stock.Currency,stock.USD,stock.exchange_rate,stock.Open_USD,stock.High_USD,stock.Low_USD,stock.Close_USD).filter(stock.Date >= '2019-01-01')
 
     Index = [result[0] for result in results]
     Date = [result[1] for result in results]
@@ -78,10 +78,10 @@ def pals():
         "Low_USD": Low_USD,
         "Close_USD": Close_USD
     }
-
     session.close()
-
+    #print(results)
     return jsonify(results)
+    
     
 
 if __name__ == "__main__":

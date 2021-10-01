@@ -1,3 +1,5 @@
+console.log('Hello')
+
 function buildPlot() {
     /* data route */
     const url = "/api/exchange";
@@ -6,3 +8,5 @@ function buildPlot() {
       console.log(response);
     });
 }
+
+buildPlot();
