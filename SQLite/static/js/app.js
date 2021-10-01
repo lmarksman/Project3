@@ -6,6 +6,7 @@ function buildPlot() {
     d3.json(url).then(function(response) {
   
       console.log(response);
+      buildCandlestick(response);
     });
 }
 

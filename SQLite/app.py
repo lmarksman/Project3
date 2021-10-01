@@ -41,7 +41,8 @@ def exchange():
 
     session = Session(engine)
 
-    results = session.query(stock.Stock_index, stock.Date,stock.Open,stock.High,stock.Low,stock.Close,stock.Volume,stock.Region,stock.Exchange,stock.Currency,stock.USD,stock.exchange_rate,stock.Open_USD,stock.High_USD,stock.Low_USD,stock.Close_USD).filter(stock.Date >= '2019-01-01')
+    results = session.query(stock.Stock_index, stock.Date,stock.Open,stock.High,stock.Low,stock.Close,stock.Volume,stock.Region,stock.Exchange,stock.Currency,stock.USD,stock.exchange_rate,stock.Open_USD,stock.High_USD,stock.Low_USD,stock.Close_USD).filter(stock.Date >= '2021-03-01', stock.Stock_index == "NYA")
+    
 
     Index = [result[0] for result in results]
     Date = [result[1] for result in results]
@@ -79,7 +80,7 @@ def exchange():
         "Close_USD": Close_USD
     }
     session.close()
-    #print(results)
+    print(results)
     return jsonify(results)
     
     
