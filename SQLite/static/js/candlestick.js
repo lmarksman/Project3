@@ -2,6 +2,8 @@ const distinct = (value, index, self) => {
     return self.indexOf(value) === index;
 }
 
+
+
 function buildMultipleCandlestick(response)
 {
     //Not currently functioning completely
@@ -22,14 +24,16 @@ function buildMultipleCandlestick(response)
     let data = [];
     for (let i=0; i<stockIndex.length; i++)
     {
-        let candlestickData = [response].filter(response.Index == stockIndex);
-        console.log(candlestickData[0]);
-        let dates = candlestickData[i].Date.map(date => new Date(date));
-        let openValues = candlestickData[i].Open.map(Number);
-        let closeValues = candlestickData[i].Close.map(Number);
-        let highValues = candlestickData[i].High.map(Number);
-        let lowValues = candlestickData[i].Low.map(Number);
-
+        let dates = response.Date.map(date => new Date(date));
+        let openValues = response.Open.map(Number);
+        let closeValues = response.Close.map(Number);
+        let highValues = response.High.map(Number);
+        let lowValues = response.Low.map(Number);
+        console.log(dates);
+        console.log(openValues);
+        console.log(closeValues);
+        console.log(highValues);
+        console.log(lowValues);
         //future enhancement for multiple color traces
         // let r = Math.round (Math.random () * 255);
         // let g = Math.round (Math.random () * 255);
@@ -52,7 +56,7 @@ function buildMultipleCandlestick(response)
             yaxis: "y",
             name: stockIndex[i]
         };
-        console.log(trace1);
+        // console.log(trace1);
         data.push(trace1);
     }
     // console.log(data);
@@ -89,6 +93,7 @@ function buildMultipleCandlestick(response)
 function buildSingleCandlestick(response)
 {
     const stockIndex = response.Index.filter(distinct);
+    console.log(stockIndex);
     let dates = response.Date.map(date => new Date(date));
     let openValues = response.Open.map(Number);
     let closeValues = response.Close.map(Number);
