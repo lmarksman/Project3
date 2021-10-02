@@ -2,7 +2,7 @@ const distinct = (value, index, self) => {
     return self.indexOf(value) === index;
 }
 
-function buildCandlestick(response)
+function buildMultipleCandlestick(response)
 {
     //Not currently functioning completely
     console.log("Candlestick");
