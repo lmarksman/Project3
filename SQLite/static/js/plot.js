@@ -1,13 +1,9 @@
-const distinct = (value, index, self) => {
-  return self.indexOf(value) === index;
-}
-
-function buildYearChart(year) {
+function buildYearChart(year, stockIndex) {
 
     console.log(year);
     // const stockIndex = response.Index.filter(distinct);
   
-    d3.json(`api/years/${year}`).then((data) => {
+    d3.json(`api/years/${year}/${stockIndex}`).then((data) => {
       
 
   
@@ -31,9 +27,12 @@ function buildYearChart(year) {
   }
 
   function optionYearChanged(newYear) {
-    buildYearChart(newYear);
+    buildYearChart(newYear, "NYA");
+    console.log("OptionYearChanged")
+    buildSingleCandlestick(newYear, "NYA");
   }
 
-  
-  buildYearChart("2000")
+  optionYearChanged(2000);
+  // buildYearChart(2000, "NYA");
+  // buildSingleCandlestick(2000, "NYA");
   

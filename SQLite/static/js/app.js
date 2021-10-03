@@ -6,8 +6,19 @@ function buildPlot() {
     d3.json(url).then(function(response) {
   
       console.log(response);
-      buildCandlestick(response);
+      buildYearChart(response);
     });
 }
 
-buildPlot();
+// function buildCandlestick(year) {
+//   /* data route */
+//   const url = `/api/years/${year}`;
+//   d3.json(url).then(function(response) {
+
+//     console.log(response);
+//     buildSingleCandlestick(response);
+//   });
+// }
+
+//buildPlot();
+//buildCandlestick();

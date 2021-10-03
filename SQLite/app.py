@@ -41,8 +41,8 @@ def home():
 
 
 ###Filter by year###
-@app.route("/api/years/<year>")
-def years(year):
+@app.route("/api/years/<year>/<stockindex>")
+def years(year, stockindex):
 
     session = Session(engine)
 
@@ -52,9 +52,11 @@ def years(year):
     print(first)
     print(last)
 
-
-    results = session.query(stock.Stock_index,stock.Date,stock.Open,stock.High,stock.Low,stock.Close,stock.Volume,stock.Region,stock.Exchange,stock.Currency,stock.USD,stock.exchange_rate,stock.Open_USD,stock.High_USD,stock.Low_USD,stock.Close_USD).filter(stock.Date.between (first,last)).all()
-
+    # results = session.execute(f"Select * from stock_exchange WHERE Date Between {first} AND {last}").fetchall()
+    # print("Year Results")
+    # print(results)
+    results = session.query(stock.Stock_index,stock.Date,stock.Open,stock.High,stock.Low,stock.Close,stock.Volume,stock.Region,stock.Exchange,stock.Currency,stock.USD,stock.exchange_rate,stock.Open_USD,stock.High_USD,stock.Low_USD,stock.Close_USD).filter(stock.Date.between (first,last), stock.Stock_index == stockindex).all()
+    
     # if year == "2000":
     #      results = session.query(stock.Stock_index,stock.Date,stock.Open,stock.High,stock.Low,stock.Close,stock.Volume,stock.Region,stock.Exchange,stock.Currency,stock.USD,stock.exchange_rate,stock.Open_USD,stock.High_USD,stock.Low_USD,stock.Close_USD).filter(stock.Date.between (date(year, 1, 1), date(year, 12, 31))).all()
     # elif year == "2002":
