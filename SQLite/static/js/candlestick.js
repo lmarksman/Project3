@@ -137,7 +137,7 @@ function buildSingleCandlestick(year, stockIndex)
                 b: 40,
                 l: 60
             },
-            showlegend: true,
+            showlegend: false,
             xaxis: {
                 autorange: true,
                 domain: [0,1],
@@ -160,3 +160,4 @@ function buildSingleCandlestick(year, stockIndex)
     });
 }
 
+buildSingleCandlestick(2021, "NYA");

@@ -99,8 +99,9 @@ def years(year, stockindex):
     #     results = session.query(stock.Stock_index,stock.Date,stock.Open,stock.High,stock.Low,stock.Close,stock.Volume,stock.Region,stock.Exchange,stock.Currency,stock.USD,stock.exchange_rate,stock.Open_USD,stock.High_USD,stock.Low_USD,stock.Close_USD).filter(stock.Date.between ('2020-01-01', '2020-12-31')).all()
     # else:
     #     results = session.query(stock.Stock_index,stock.Date,stock.Open,stock.High,stock.Low,stock.Close,stock.Volume,stock.Region,stock.Exchange,stock.Currency,stock.USD,stock.exchange_rate,stock.Open_USD,stock.High_USD,stock.Low_USD,stock.Close_USD).filter(stock.Date >='2021-01-01').all()
-        
-
+    
+    # result_IDS = ["Index", "Date","Open","High","Low","Close","Volume","Region","Exchange","Currency","USD","exchange_rate"]
+    # year_results = zip(result_IDS, results)
     results = [list(r) for r in results]
 
     Index = [result[0] for result in results]
@@ -140,7 +141,7 @@ def years(year, stockindex):
     }
 
     session.close()
-    # print(year_results)
+    # print(set(year_results))
     return jsonify(year_results)
 
 ###Filter by stock exchange###

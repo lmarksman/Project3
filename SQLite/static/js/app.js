@@ -10,6 +10,17 @@ function buildPlot() {
     });
 }
 
+function GetReults(form){
+  console.log("GetResults")
+    buildYearChart(form.year, form.stock);
+    buildSingleCandlestick(form.year, form.stock);
+}
+
+function optionStockChanged(stockIndex) {
+  buildYearChart(2021,stockIndex);
+  console.log("OptionYearChanged")
+  buildSingleCandlestick(2021, stockIndex);
+}
 // function buildCandlestick(year) {
 //   /* data route */
 //   const url = `/api/years/${year}`;

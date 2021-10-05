@@ -32,7 +32,7 @@ function buildYearChart(year, stockIndex) {
     buildSingleCandlestick(newYear, "NYA");
   }
 
-  optionYearChanged(2000);
-  // buildYearChart(2000, "NYA");
-  // buildSingleCandlestick(2000, "NYA");
+  // optionYearChanged(2000);
+  buildYearChart(2021, "NYA");
+  
   
