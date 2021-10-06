@@ -1,6 +1,6 @@
 import os
 from sqlalchemy.orm import Session
-from sqlalchemy import create_engine, func, distinct
+from sqlalchemy import create_engine, func, desc
 from sqlalchemy.ext.automap import automap_base
 from datetime import date
 import sqlalchemy as sa
@@ -130,22 +130,15 @@ def pie2(stockIndex):
     print("PIE2")
     session = Session(engine)
 
-    results = session.query(func.extract(stock.Date, 'year'), func.sum(stock.Volume)).filter(stock.Stock_index == stockIndex).group_by(func.extract(stock.Date, 'year')).all()
-    # rs = session.execute(f"SELECT extract(year FROM Date) as year, sum(Volume) FROM stock_exchange WHERE Stock_index='{stockIndex}' group by 1")
-    # for row in rs:
-    #     print(row)
-    
-    
-    
-    # print(results)
+    results = session.query(func.strftime("%Y", stock.Date), func.sum(stock.Volume * 0.00001)).filter(stock.Stock_index == stockIndex).group_by(func.strftime("%Y", stock.Date)).order_by(desc(func.strftime("%Y", stock.Date))).all()
 
     Year = [result[0] for result in results]
     Volume = [result[1] for result in results]
-    # print(Year)
-    # print(Volume)
+    print(Year)
+    print(Volume)
     pie_results ={
-        "Year": [], #Year,
-        "Volume": [] # Volume
+        "Year": Year,
+        "Volume": Volume,
     }
 
     session.close()

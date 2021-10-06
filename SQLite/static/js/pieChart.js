@@ -7,22 +7,24 @@ function buildPieChart(year){
         let trace = [{
         values: data["Volume"],
         labels: data["Index"],
-        type: 'pie'        
+        type: 'pie'
       }];
       
       
       var layout = {
-        height: 600,
-        width: 800,
+        height: 500,
+        width: 750,
         title: `Volume For ${year}`
+        
       };
+      
       
       
       Plotly.newPlot('piechart', trace, layout);
     });
 }
 
-function buildPieChart2(stockIndex){
+function buildPieChart2(stockIndex, stockName){
     console.log("PieChart2");
 
     d3.json(`api/pie2/${stockIndex}`).then((data) => {
@@ -31,14 +33,15 @@ function buildPieChart2(stockIndex){
         let trace = [{
         values: data["Volume"],
         labels: data["Year"],
-        type: 'pie'        
+        type: 'pie',
+        sort:false        
       }];
       
       
       var layout = {
-        height: 600,
-        width: 800,
-        title: `Volume For ${stockIndex}`
+        height: 500,
+        width: 750,
+        title: `Volume over the years for ${stockName}`
       };
       
       
@@ -47,4 +50,4 @@ function buildPieChart2(stockIndex){
 }
 
 buildPieChart(2021);
-buildPieChart2("NYA");
+buildPieChart2("NYA", "New York Stock Exchange");
