@@ -19,6 +19,8 @@ function GetResults(){
 
   buildYearChart(year.value, stock.value);
   buildSingleCandlestick(year.value, stock.value);
+  buildPieChart(year.value);
+  buildPieChart2(stock.value);
 }
 
 // function optionStockChanged(stockIndex) {

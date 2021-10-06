@@ -1,8 +1,9 @@
 import os
 from sqlalchemy.orm import Session
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, func, distinct
 from sqlalchemy.ext.automap import automap_base
 from datetime import date
+import sqlalchemy as sa
 
 from flask import (
     Flask,
@@ -10,6 +11,7 @@ from flask import (
     jsonify,
     request,
     redirect)
+from sqlalchemy.sql.expression import extract
 from sqlalchemy.sql.schema import Index
 
 
@@ -52,56 +54,10 @@ def years(year, stockindex):
     print(first)
     print(last)
 
-    # results = session.execute(f"Select * from stock_exchange WHERE Date Between {first} AND {last}").fetchall()
-    # print("Year Results")
-    # print(results)
     results = session.query(stock.Stock_index,stock.Date,stock.Open,stock.High,stock.Low,stock.Close,stock.Volume,stock.Region,stock.Exchange,stock.Currency,stock.USD,stock.exchange_rate,stock.Open_USD,stock.High_USD,stock.Low_USD,stock.Close_USD).filter(stock.Date.between (first,last), stock.Stock_index == stockindex).all()
-    
-    # if year == "2000":
-    #      results = session.query(stock.Stock_index,stock.Date,stock.Open,stock.High,stock.Low,stock.Close,stock.Volume,stock.Region,stock.Exchange,stock.Currency,stock.USD,stock.exchange_rate,stock.Open_USD,stock.High_USD,stock.Low_USD,stock.Close_USD).filter(stock.Date.between (date(year, 1, 1), date(year, 12, 31))).all()
-    # elif year == "2002":
-    #     results = session.query(stock.Stock_index,stock.Date,stock.Open,stock.High,stock.Low,stock.Close,stock.Volume,stock.Region,stock.Exchange,stock.Currency,stock.USD,stock.exchange_rate,stock.Open_USD,stock.High_USD,stock.Low_USD,stock.Close_USD).filter(stock.Date.between ('2001-01-01', '2001-12-31')).all()
-    # elif year == "2003":
-    #     results = session.query(stock.Stock_index,stock.Date,stock.Open,stock.High,stock.Low,stock.Close,stock.Volume,stock.Region,stock.Exchange,stock.Currency,stock.USD,stock.exchange_rate,stock.Open_USD,stock.High_USD,stock.Low_USD,stock.Close_USD).filter(stock.Date.between ('2003-01-01', '2003-12-31')).all()
-    # elif year == "2004":
-    #     results = session.query(stock.Stock_index,stock.Date,stock.Open,stock.High,stock.Low,stock.Close,stock.Volume,stock.Region,stock.Exchange,stock.Currency,stock.USD,stock.exchange_rate,stock.Open_USD,stock.High_USD,stock.Low_USD,stock.Close_USD).filter(stock.Date.between ('2004-01-01', '2004-12-31')).all()
-    # elif year == "2005":
-    #     results = session.query(stock.Stock_index,stock.Date,stock.Open,stock.High,stock.Low,stock.Close,stock.Volume,stock.Region,stock.Exchange,stock.Currency,stock.USD,stock.exchange_rate,stock.Open_USD,stock.High_USD,stock.Low_USD,stock.Close_USD).filter(stock.Date.between ('2005-01-01', '2005-12-31')).all()
-    # elif year == "2006":
-    #     results = session.query(stock.Stock_index,stock.Date,stock.Open,stock.High,stock.Low,stock.Close,stock.Volume,stock.Region,stock.Exchange,stock.Currency,stock.USD,stock.exchange_rate,stock.Open_USD,stock.High_USD,stock.Low_USD,stock.Close_USD).filter(stock.Date.between ('2006-01-01', '2006-12-31')).all()
-    # elif year == "2007":
-    #     results = session.query(stock.Stock_index,stock.Date,stock.Open,stock.High,stock.Low,stock.Close,stock.Volume,stock.Region,stock.Exchange,stock.Currency,stock.USD,stock.exchange_rate,stock.Open_USD,stock.High_USD,stock.Low_USD,stock.Close_USD).filter(stock.Date.between ('2007-01-01', '2007-12-31')).all()
-    # elif year == "2008":
-    #     results = session.query(stock.Stock_index,stock.Date,stock.Open,stock.High,stock.Low,stock.Close,stock.Volume,stock.Region,stock.Exchange,stock.Currency,stock.USD,stock.exchange_rate,stock.Open_USD,stock.High_USD,stock.Low_USD,stock.Close_USD).filter(stock.Date.between ('2008-01-01', '2008-12-31')).all()
-    # elif year == "2009":
-    #     results = session.query(stock.Stock_index,stock.Date,stock.Open,stock.High,stock.Low,stock.Close,stock.Volume,stock.Region,stock.Exchange,stock.Currency,stock.USD,stock.exchange_rate,stock.Open_USD,stock.High_USD,stock.Low_USD,stock.Close_USD).filter(stock.Date.between ('2009-01-01', '2009-12-31')).all()
-    # elif year == "2010":
-    #     results = session.query(stock.Stock_index,stock.Date,stock.Open,stock.High,stock.Low,stock.Close,stock.Volume,stock.Region,stock.Exchange,stock.Currency,stock.USD,stock.exchange_rate,stock.Open_USD,stock.High_USD,stock.Low_USD,stock.Close_USD).filter(stock.Date.between ('2010-01-01', '2010-12-31')).all()
-    # elif year == "2011":
-    #     results = session.query(stock.Stock_index,stock.Date,stock.Open,stock.High,stock.Low,stock.Close,stock.Volume,stock.Region,stock.Exchange,stock.Currency,stock.USD,stock.exchange_rate,stock.Open_USD,stock.High_USD,stock.Low_USD,stock.Close_USD).filter(stock.Date.between ('2011-01-01', '2011-12-31')).all()
-    # elif year == "2012":
-    #     results = session.query(stock.Stock_index,stock.Date,stock.Open,stock.High,stock.Low,stock.Close,stock.Volume,stock.Region,stock.Exchange,stock.Currency,stock.USD,stock.exchange_rate,stock.Open_USD,stock.High_USD,stock.Low_USD,stock.Close_USD).filter(stock.Date.between ('2012-01-01', '2012-12-31')).all()
-    # elif year == "2013":
-    #     results = session.query(stock.Stock_index,stock.Date,stock.Open,stock.High,stock.Low,stock.Close,stock.Volume,stock.Region,stock.Exchange,stock.Currency,stock.USD,stock.exchange_rate,stock.Open_USD,stock.High_USD,stock.Low_USD,stock.Close_USD).filter(stock.Date.between ('2013-01-01', '2013-12-31')).all()
-    # elif year == "2014":
-    #     results = session.query(stock.Stock_index,stock.Date,stock.Open,stock.High,stock.Low,stock.Close,stock.Volume,stock.Region,stock.Exchange,stock.Currency,stock.USD,stock.exchange_rate,stock.Open_USD,stock.High_USD,stock.Low_USD,stock.Close_USD).filter(stock.Date.between ('2014-01-01', '2014-12-31')).all()
-    # elif year == "2015":
-    #     results = session.query(stock.Stock_index,stock.Date,stock.Open,stock.High,stock.Low,stock.Close,stock.Volume,stock.Region,stock.Exchange,stock.Currency,stock.USD,stock.exchange_rate,stock.Open_USD,stock.High_USD,stock.Low_USD,stock.Close_USD).filter(stock.Date.between ('2015-01-01', '2015-12-31')).all()
-    # elif year == "2016":
-    #     results = session.query(stock.Stock_index,stock.Date,stock.Open,stock.High,stock.Low,stock.Close,stock.Volume,stock.Region,stock.Exchange,stock.Currency,stock.USD,stock.exchange_rate,stock.Open_USD,stock.High_USD,stock.Low_USD,stock.Close_USD).filter(stock.Date.between ('2016-01-01', '2016-12-31')).all()
-    # elif year == "2017":
-    #     results = session.query(stock.Stock_index,stock.Date,stock.Open,stock.High,stock.Low,stock.Close,stock.Volume,stock.Region,stock.Exchange,stock.Currency,stock.USD,stock.exchange_rate,stock.Open_USD,stock.High_USD,stock.Low_USD,stock.Close_USD).filter(stock.Date.between ('2017-01-01', '2017-12-31')).all()
-    # elif year == "2018":
-    #     results = session.query(stock.Stock_index,stock.Date,stock.Open,stock.High,stock.Low,stock.Close,stock.Volume,stock.Region,stock.Exchange,stock.Currency,stock.USD,stock.exchange_rate,stock.Open_USD,stock.High_USD,stock.Low_USD,stock.Close_USD).filter(stock.Date.between ('2018-01-01', '2018-12-31')).all()
-    # elif year == "2019":
-    #     results = session.query(stock.Stock_index,stock.Date,stock.Open,stock.High,stock.Low,stock.Close,stock.Volume,stock.Region,stock.Exchange,stock.Currency,stock.USD,stock.exchange_rate,stock.Open_USD,stock.High_USD,stock.Low_USD,stock.Close_USD).filter(stock.Date.between ('2019-01-01', '2019-12-31')).all()
-    # elif year == "2020":
-    #     results = session.query(stock.Stock_index,stock.Date,stock.Open,stock.High,stock.Low,stock.Close,stock.Volume,stock.Region,stock.Exchange,stock.Currency,stock.USD,stock.exchange_rate,stock.Open_USD,stock.High_USD,stock.Low_USD,stock.Close_USD).filter(stock.Date.between ('2020-01-01', '2020-12-31')).all()
-    # else:
-    #     results = session.query(stock.Stock_index,stock.Date,stock.Open,stock.High,stock.Low,stock.Close,stock.Volume,stock.Region,stock.Exchange,stock.Currency,stock.USD,stock.exchange_rate,stock.Open_USD,stock.High_USD,stock.Low_USD,stock.Close_USD).filter(stock.Date >='2021-01-01').all()
-    
-    # result_IDS = ["Index", "Date","Open","High","Low","Close","Volume","Region","Exchange","Currency","USD","exchange_rate"]
-    # year_results = zip(result_IDS, results)
+    # rTest = session.query(stock).filter(stock.Date.between (first,last), stock.Stock_index == stockindex).all()
+    # print("RTest")
+    # print(rTest)
     results = [list(r) for r in results]
 
     Index = [result[0] for result in results]
@@ -143,6 +99,58 @@ def years(year, stockindex):
     session.close()
     # print(set(year_results))
     return jsonify(year_results)
+
+# pie chart to dispaly volume for all stock indexes
+@app.route("/api/pie/<year>")
+def pie(year):
+    session = Session(engine)
+    print("PieChart App.py")
+    first = date(int(year), 1, 1)
+    last = date(int(year), 12, 31)
+    print(first)
+    print(last)
+
+    results = session.query(stock.Exchange, func.sum(stock.Volume)).filter(stock.Date.between (first,last)).group_by(stock.Stock_index).all()
+    
+    Exchange = [result[0] for result in results]
+    Volume = [result[1] for result in results]
+
+    pie_results ={
+        "Index": Exchange,
+        "Volume": Volume
+    }
+
+    session.close()
+    # print(set(year_results))
+    return jsonify(pie_results)
+
+
+@app.route("/api/pie2/<stockIndex>")
+def pie2(stockIndex):
+    print("PIE2")
+    session = Session(engine)
+
+    results = session.query(func.extract(stock.Date, 'year'), func.sum(stock.Volume)).filter(stock.Stock_index == stockIndex).group_by(func.extract(stock.Date, 'year')).all()
+    # rs = session.execute(f"SELECT extract(year FROM Date) as year, sum(Volume) FROM stock_exchange WHERE Stock_index='{stockIndex}' group by 1")
+    # for row in rs:
+    #     print(row)
+    
+    
+    
+    # print(results)
+
+    Year = [result[0] for result in results]
+    Volume = [result[1] for result in results]
+    # print(Year)
+    # print(Volume)
+    pie_results ={
+        "Year": [], #Year,
+        "Volume": [] # Volume
+    }
+
+    session.close()
+    # print(set(year_results))
+    return jsonify(pie_results)
 
 ###Filter by stock exchange###
 @app.route("/api/exchanges/<exchange>")
