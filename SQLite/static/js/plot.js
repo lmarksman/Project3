@@ -26,11 +26,11 @@ function buildYearChart(year, stockIndex) {
     })
   }
 
-  function optionYearChanged(newYear) {
-    buildYearChart(newYear, "NYA");
-    console.log("OptionYearChanged")
-    buildSingleCandlestick(newYear, "NYA");
-  }
+  // function optionYearChanged(newYear) {
+  //   buildYearChart(newYear, "NYA");
+  //   console.log("OptionYearChanged")
+  //   buildSingleCandlestick(newYear, "NYA");
+  // }
 
   // optionYearChanged(2000);
   buildYearChart(2021, "NYA");

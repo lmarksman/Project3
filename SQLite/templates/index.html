@@ -8,15 +8,15 @@
     <title>World Stock Exchange</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
 </head>
 
 <body>
     <div class="container">
-      <!-- <form name="myform" action = "" method="GET"> -->
           <div class="row">
             <div class="col-md-2">
               <label for="years">Year:</label>
-              <select name="year" id="year" onchange="optionYearChanged(this.value)"> 
+              <select name="year" id="year" > 
                 <option value="2021">2021</option>
                 <option value="2020">2020</option>
                 <option value="2019">2019</option>
@@ -43,7 +43,7 @@
             </div>
             <div class="col-md-4">
               <label for="StockIndexes">Stocks</label>
-                <select name="stock" id="stock" onchange="optionStockChanged(this.value)">
+                <select name="stock" id="stock"> 
                   <option value="NYA">New York Stock Exchange</option>
                   <option value="IXIC">NASDAQ</option>
                   <option value="HSI">Hong Kong Stock Exchange</option>
@@ -60,12 +60,11 @@
                 </select>        
             </div>
             <div class="col-md-6">
-              <button type="submit" class="btn btn-primary" onClick="GetResults(this.form)">Go</button>
+              <button  class="btn btn-primary" onClick="GetResults()">Update</button>
             </div>
 
           </div>
           
-        </form>
         <div class="row" >
           <div class="col-md-6">
             <div id="compare_open"></div>
