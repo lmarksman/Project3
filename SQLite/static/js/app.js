@@ -22,10 +22,12 @@ function GetResults(){
   buildSingleCandlestick(year.value, stock.value);
   buildPieChart(year.value);
   buildPieChart2(stock.value, stock.options[stock.selectedIndex].text);
+  buildExchangeChart(year.value, stock.value, stock.options[stock.selectedIndex].text);
 }
 
 // function optionStockChanged(stockIndex) {
 //   buildYearChart(2021,stockIndex);
+
 //   console.log("OptionYearChanged")
 //   buildSingleCandlestick(2021, stockIndex);
 // }
