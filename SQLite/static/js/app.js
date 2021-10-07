@@ -16,9 +16,12 @@ function GetResults(){
   console.log(year.value);
   let stock = document.getElementById("stock");
   console.log(stock.value);
+  console.log(stock.options[stock.selectedIndex].text);
 
   buildYearChart(year.value, stock.value);
   buildSingleCandlestick(year.value, stock.value);
+  buildPieChart(year.value);
+  buildPieChart2(stock.value, stock.options[stock.selectedIndex].text);
 }
 
 // function optionStockChanged(stockIndex) {
