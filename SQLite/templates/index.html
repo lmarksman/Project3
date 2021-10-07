@@ -14,7 +14,7 @@
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.html">World Stock Exchange</a>
+            <a class="navbar-brand ps-3" href="/">World Stock Exchange</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             
@@ -27,7 +27,7 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href="index.html">
+                            <a class="nav-link" href="/">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Dashboard
                             </a>
@@ -40,12 +40,10 @@
                             </a>
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        Exchange Rates
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
+                                    <a class="nav-link" href="">Exchange rates</a>
                                 </nav>
                             </div>
+
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
@@ -57,10 +55,16 @@
             <div id="layoutSidenav_content">
                 <main style="position: relative;">
                     <div class="container-fluid px-4">
+                        <div style="clear: both">
+                            <h1 style="float: left"></h1>
+                            <i class="fas fa-globe fa-5x" style="float: right"></i>
+                        </div>
                         <h1 class="mt-4">Dashboard</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Dashboard</li>
+                            <li class="breadcrumb-item active">Explore 20 years of data from 13 stock exchanges around the world</li>
                         </ol>
+
+                        <hr>
 
                         <div class="row">
                             <div class="col-xl-4">
@@ -118,7 +122,7 @@
                                       </div>
                                       <br>
                                       <div style="padding-left: 5px;">
-                                        <button  class="btn btn-primary" onClick="GetResults()">Update</button>
+                                        <button  class="btn" style ="background-color: #495057; color: white;" onClick="GetResults()">Update</button>
                                       </div>
                                     </div>
                                 </div>
@@ -129,9 +133,10 @@
                             </div>
                         </div>
 
-
+                        <br>
+                        <h2 > Analysis of Stock Price</h2>
+                        <br>
                         
-
                         <div class="row">
                             <div class="col-xl-6">
                                 <div class="card mb-4">
@@ -157,12 +162,16 @@
                             </div>
                         </div>
 
+                        <br>
+                        <h2 > Analysis of Stocks Traded</h2>
+                        <br>
+
                         <div class="row">
                             <div class="col-xl-6">
                                 <div class="card mb-4">
                                     <div class="card-header">
                                         <i class="fas fa-chart-pie me-1"></i>
-                                        Volume of Stocks Traded
+                                        Volume of Trades
                                     </div>
                                     <div class="card-body">
                                         <div id="piechart"></div>

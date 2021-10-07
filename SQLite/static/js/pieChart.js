@@ -12,8 +12,8 @@ function buildPieChart(year){
       
       
       var layout = {
-        height: 375,
-        width: 600,
+        // height: 375,
+        // width: 600,
         title: `Volume For ${year}`
         
       };
@@ -40,8 +40,8 @@ function buildPieChart2(stockIndex, stockName){
       
       
       var layout = {
-        height: 375,
-        width: 600,
+        // height: 375,
+        // width: 600,
         title: `${stockName}`
       };
       
