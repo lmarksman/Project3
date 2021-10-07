@@ -12,8 +12,8 @@ function buildPieChart(year){
       
       
       var layout = {
-        height: 500,
-        width: 750,
+        height: 375,
+        width: 600,
         title: `Volume For ${year}`
         
       };
@@ -34,14 +34,15 @@ function buildPieChart2(stockIndex, stockName){
         values: data["Volume"],
         labels: data["Year"],
         type: 'pie',
-        sort:false        
+        sort:false   ,
+        rotation: 180     
       }];
       
       
       var layout = {
-        height: 500,
-        width: 750,
-        title: `Volume over the years for ${stockName}`
+        height: 375,
+        width: 600,
+        title: `${stockName}`
       };
       
       

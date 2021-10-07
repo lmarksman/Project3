@@ -16,7 +16,8 @@ function buildYearChart(year, stockIndex) {
       var trace = [ trace1 ];
       
       var layout = { 
-        title: 'Years',
+        tickformat: '%d/%m'
+        
       };
       
       var config = {responsive: true}
