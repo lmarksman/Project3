@@ -48,16 +48,13 @@ def years(year, stockindex):
 
     session = Session(engine)
 
-    # new_york = session.query(stock.Stock_index,stock.Date,stock.Open,stock.High,stock.Low,stock.Close,stock.Volume,stock.Region,stock.Exchange,stock.Currency,stock.USD,stock.exchange_rate,stock.Open_USD,stock.High_USD,stock.Low_USD,stock.Close_USD).filter(stock.Year == year).filter(stock.Exchange = "New York Stock Exchange").all()
     first = date(int(year), 1, 1)
     last = date(int(year), 12, 31)
     print(first)
     print(last)
 
     results = session.query(stock.Stock_index,stock.Date,stock.Open,stock.High,stock.Low,stock.Close,stock.Volume,stock.Region,stock.Exchange,stock.Currency,stock.USD,stock.exchange_rate,stock.Open_USD,stock.High_USD,stock.Low_USD,stock.Close_USD).filter(stock.Date.between (first,last), stock.Stock_index == stockindex).all()
-    # rTest = session.query(stock).filter(stock.Date.between (first,last), stock.Stock_index == stockindex).all()
-    # print("RTest")
-    # print(rTest)
+    
     results = [list(r) for r in results]
 
     Index = [result[0] for result in results]
@@ -90,10 +87,6 @@ def years(year, stockindex):
          "Currency": Currency,
          "USD": USD,
          "exchange_rate": exchange_rate,
-        #  "Open_USD": Open_USD,
-        #   "High_USD": High_USD,
-        #   "Low_USD": Low_USD,
-        #   "Close_USD": Close_USD
     }
 
     session.close()
@@ -121,7 +114,7 @@ def pie(year):
     }
 
     session.close()
-    # print(set(year_results))
+    
     return jsonify(pie_results)
 
 
@@ -142,7 +135,7 @@ def pie2(stockIndex):
     }
 
     session.close()
-    # print(set(year_results))
+    
     return jsonify(pie_results)
 
 ###Filter by stock exchange###
@@ -154,55 +147,20 @@ def exchanges(year, stockIndex):
     print("Exchange App.py")
     first = date(int(year), 1, 1)
     last = date(int(year), 12, 31)
-    # print(first)
-    # print(last)
 
     results = session.query(stock.Date, stock.exchange_rate).filter(stock.Date.between (first,last), stock.exchange_rate > 0, stock.Stock_index == stockIndex).all()
 
     
-
-    # if exchange == "New York":
-    #     name = "New York Stock Exchange"
-    # elif exchange == "NASDAQ":
-    #     name = "NASDAQ"
-    # elif exchange == "Hong Kong":
-    #     name = "Hong Kong Stock Exchange"
-    # elif exchange == "Shanghai":
-    #     name = "Shanghai Stock Exchange"
-    # elif exchange == "Toronto":
-    #     name = "Toronto Stock Exchange"
-    # elif exchange == "Shenzhen":
-    #     name = "Shenzhen Stock Exchange"
-    # elif exchange == "India":
-    #     name = "National Stock Exchange of India"
-    # elif exchange == "Frankfurt":
-    #     name = "Frankfurt Stock Exchange"
-    # elif exchange == "Korea":
-    #     name = "Korea Exchange"
-    # elif exchange == "Swiss":
-    #     name = "SIX Swiss Exchange"
-    # elif exchange == "Johannesburg":
-    #     name = "Johannesburg Stock Exchange"
-    # elif exchange == "Tokyo":
-    #     name = "Tokyo Stock Exchange"
-    # elif exchange == "Euronext":
-    #     name = "Euronext"
-
-    # session = Session(engine)
-
-    # results = session.query(stock.Stock_index,stock.Date,stock.Open,stock.High,stock.Low,stock.Close,stock.Volume,stock.Region,stock.Exchange,stock.Currency,stock.USD,stock.exchange_rate,stock.Open_USD,stock.High_USD,stock.Low_USD,stock.Close_USD).filter(stock.Exchange == name).all()
-    
     Date = [result[0] for result in results]
     Exchange_Rate = [result[1] for result in results]
-    # print(Year)
-    # print(Exchange_Rate)
+    
     exchange_results ={
         "Date": Date,
         "Rate": Exchange_Rate,
     }
 
     session.close()
-    # print(set(year_results))
+    
     return jsonify(exchange_results)
 
     
